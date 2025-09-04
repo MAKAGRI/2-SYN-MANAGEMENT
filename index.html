@@ -1,182 +1,285 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PAT Cargo VAD LLC</title>
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
-            color: #333;
-        }
-        nav {
-            background: #000;
-            color: #fff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        nav .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-        nav ul {
-            list-style: none;
-            display: flex;
-            margin: 0;
-            padding: 0;
-        }
-        nav ul li {
-            margin: 0 15px;
-        }
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 16px;
-        }
-        .hero {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            padding: 80px 20px;
-            background: #111;
-            color: #fff;
-            min-height: 100vh;
-            animation: fadeIn 2s ease-in-out;
-        }
-        .hero-text {
-            max-width: 500px;
-            padding: 20px;
-            animation: slideInLeft 1.5s ease;
-        }
-        .hero-text h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-        .hero-text p {
-            font-size: 18px;
-            line-height: 1.6;
-        }
-        .hero-img img {
-            max-width: 400px;
-            width: 100%;
-            border-radius: 10px;
-            animation: slideInRight 1.5s ease;
-        }
-        .section {
-            padding: 60px 20px;
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s ease;
-        }
-        .section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .section h2 {
-            font-size: 32px;
-            margin-bottom: 20px;
-        }
-        .section p {
-            font-size: 18px;
-            line-height: 1.8;
-            color: #555;
-        }
-        .contact {
-            background: #e9e9e9;
-            padding: 60px 20px;
-        }
-        footer {
-            background: #000;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-            font-size: 14px;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2 SYN MANAGEMENT — Consulting & Strategy</title>
+  <meta name="description" content="2 SYN MANAGEMENT — management, scientific & technical consulting. Contact admin@arwexy.shop, +33 7 58 69 55 50." />
+  <style>
+    :root{
+      --ink:#0a1426;          /* deep navy */
+      --panel:#0f1f3b;
+      --text:#f5f8ff;
+      --muted:#c7d4ea;
+      --primary:#3b82f6;     /* blue */
+      --accent:#06b6d4;      /* cyan */
+      --ring:rgba(59,130,246,.28);
+      --max:1200px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{
+      font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--ink); color:var(--text); line-height:1.6;
+    }
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--max); margin:0 auto; padding:24px}
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes slideInLeft {
-            from { transform: translateX(-50px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        @keyframes slideInRight {
-            from { transform: translateX(50px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-    </style>
+    /* NAV */
+    .nav{
+      position:sticky; top:0; z-index:50;
+      background:rgba(8,16,34,.7); backdrop-filter:blur(10px);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .nav-wrap{display:flex; align-items:center; justify-content:space-between}
+    .brand{
+      font-weight:900; letter-spacing:.4px;
+      background:linear-gradient(120deg,var(--primary),var(--accent));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .menu{display:flex; gap:18px}
+    .menu a{opacity:.92} .menu a:hover{opacity:1}
+
+    /* HERO (animated) */
+    .hero{
+      position:relative; min-height:88vh; display:flex; align-items:center; justify-content:center; text-align:center;
+      overflow:hidden; background:linear-gradient(120deg,#0f2141,#0a2a4a);
+    }
+    .gridfx{
+      position:absolute; inset:-50%;
+      background:
+        radial-gradient(circle, rgba(255,255,255,.14) 9%, transparent 20%) 0 0/220px 220px,
+        radial-gradient(circle, rgba(255,255,255,.09) 9%, transparent 20%) 110px 110px/220px 220px;
+      animation:spin 22s linear infinite; filter:blur(1px);
+    }
+    @keyframes spin{from{transform:rotate(0)} to{transform:rotate(360deg)}}
+    .glow{
+      position:absolute; width:1200px; height:1200px; border-radius:50%;
+      background:radial-gradient(closest-side, rgba(6,182,212,.22), transparent 65%);
+      filter: blur(28px);
+    }
+    .hero-content{position:relative; z-index:2; padding:0 18px; max-width:900px}
+    .title{
+      font-size:clamp(32px,6vw,64px); font-weight:900; margin:0 0 10px;
+      text-shadow:0 2px 14px rgba(0,0,0,.55);
+      animation:glow 2.1s ease-in-out infinite alternate;
+    }
+    @keyframes glow{
+      from{ text-shadow:0 2px 10px rgba(0,0,0,.45), 0 0 6px rgba(59,130,246,.25)}
+      to{   text-shadow:0 2px 18px rgba(0,0,0,.65), 0 0 22px rgba(6,182,212,.45)}
+    }
+    .subtitle{opacity:.95; font-size:clamp(14px,2.2vw,18px); margin:0 0 18px}
+    .tags{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:18px}
+    .tag{
+      font-size:12px; font-weight:800; letter-spacing:.2px; color:#06142a;
+      padding:6px 10px; border-radius:999px; background:linear-gradient(120deg,var(--primary),var(--accent));
+    }
+    .cta-row{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
+    .btn{
+      display:inline-block; padding:12px 20px; border-radius:14px; font-weight:800;
+      box-shadow:0 14px 32px var(--ring); transition:transform .2s ease, filter .2s ease;
+    }
+    .btn-primary{background:#fff; color:#0b172b}
+    .btn-primary:hover{transform:translateY(-2px); filter:brightness(1.03)}
+    .btn-ghost{background:rgba(255,255,255,.1); color:#fff; border:1px solid rgba(255,255,255,.25)}
+    .btn-ghost:hover{transform:translateY(-2px)}
+
+    /* SECTIONS */
+    section{padding:68px 0}
+    .section-title{
+      font-size:28px; font-weight:900; margin:0 0 8px;
+      background:linear-gradient(120deg,var(--primary),var(--accent));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .muted{color:var(--muted)}
+
+    /* GALLERY */
+    .gallery{display:grid; gap:18px; grid-template-columns:repeat(2,1fr)}
+    .shot{position:relative; overflow:hidden; border-radius:16px; background:#000}
+    .shot img{width:100%; height:100%; object-fit:cover; display:block; transform:scale(1.02); transition:transform .45s ease}
+    .shot:hover img{transform:scale(1.07)}
+
+    /* FEATURES */
+    .features{background:var(--panel)}
+    .features-list{display:grid; gap:14px; max-width:900px; margin:18px auto 0}
+    .feature{
+      background:#0f274e; border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:14px 16px;
+      display:flex; gap:10px; align-items:flex-start; box-shadow:0 10px 24px rgba(0,0,0,.45);
+      transform:translateY(10px); opacity:0; transition:transform .6s ease, opacity .6s ease; color:#eaf2ff;
+    }
+    .feature.show{transform:none; opacity:1}
+    .dot{flex:0 0 10px; height:10px; border-radius:50%; background:var(--accent); margin-top:7px}
+
+    /* COMING SOON */
+    .coming{background:#0b1f3b; text-align:center; border-top:1px solid rgba(255,255,255,.08); border-bottom:1px solid rgba(255,255,255,.08)}
+    .badge{display:inline-block; padding:6px 10px; border-radius:999px; font-size:12px; font-weight:800; background:rgba(59,130,246,.16); color:#cfe2ff; border:1px solid rgba(59,130,246,.35)}
+    .marquee{margin-top:14px; white-space:nowrap; overflow:hidden; mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent)}
+    .marquee span{display:inline-block; padding:8px 14px; margin-right:16px; border-radius:999px; border:1px dashed rgba(6,182,212,.35); color:#a5f3fc; background:rgba(6,182,212,.08); animation:slide 18s linear infinite}
+    @keyframes slide{from{transform:translateX(0)} to{transform:translateX(-50%)}}
+
+    /* CONTACT */
+    .contact-grid{display:grid; gap:18px; grid-template-columns:1.1fr .9fr}
+    .card{background:#0f274e; border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:18px}
+    .list{list-style:none; padding:0; margin:0}
+    .list li{padding:8px 0; border-bottom:1px dashed rgba(255,255,255,.14)}
+    .btn-send{
+      display:inline-block; margin-top:10px; padding:12px 16px; border-radius:12px; font-weight:800;
+      background:linear-gradient(120deg,var(--primary),var(--accent)); color:#06142a; border:0;
+      box-shadow:0 12px 28px var(--ring); cursor:pointer; transition:transform .18s ease, filter .18s ease;
+    }
+    .btn-send:hover{transform:translateY(-2px)}
+    input, textarea{
+      width:100%; padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.18); outline:none;
+      background:#0b172b; color:#fff; font-size:16px; transition:border .15s ease, box-shadow .15s ease
+    }
+    input:focus, textarea:focus{border-color:rgba(59,130,246,.55); box-shadow:0 0 0 4px rgba(59,130,246,.18)}
+    textarea{min-height:120px; resize:vertical}
+    iframe{width:100%; height:360px; border:0; border-radius:14px}
+
+    /* FOOTER */
+    footer{padding:28px 0; text-align:center; color:#b9c7df; border-top:1px solid rgba(255,255,255,.08)}
+
+    /* Reveal */
+    .reveal{opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s ease}
+    .reveal.show{opacity:1; transform:none}
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .gallery{grid-template-columns:1fr}
+      .contact-grid{grid-template-columns:1fr}
+      .menu{display:none}
+    }
+  </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">PAT Cargo VAD LLC</div>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+  <!-- NAV -->
+  <div class="nav" role="navigation" aria-label="Primary">
+    <div class="container nav-wrap">
+      <div class="brand">2&nbsp;SYN&nbsp;MANAGEMENT</div>
+      <nav class="menu">
+        <a href="#gallery">Gallery</a>
+        <a href="#features">Features</a>
+        <a href="#coming">Coming</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero" role="banner">
+    <div class="gridfx" aria-hidden="true"></div>
+    <div class="glow" aria-hidden="true"></div>
+    <div class="hero-content">
+      <div class="tags">
+        <span class="tag">Management Consulting</span>
+        <span class="tag">Scientific & Technical Services</span>
+      </div>
+      <h1 class="title">Turn Insight into Impact</h1>
+      <p class="subtitle">Strategy, operations and data-driven execution for sustainable growth.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#contact">Contact Us</a>
+        <a class="btn btn-ghost" href="mailto:admin@arwexy.shop">admin@arwexy.shop</a>
+        <a class="btn btn-ghost" href="tel:+33758695550">+33&nbsp;7&nbsp;58&nbsp;69&nbsp;55&nbsp;50</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="container">
+    <h2 class="section-title reveal">Gallery</h2>
+    <p class="muted reveal">A feel for our consulting environment and mindset.</p>
+    <div class="gallery" style="margin-top:18px">
+      <figure class="shot reveal">
+        <img src="https://avatars.mds.yandex.net/i?id=4581ebc459364583b535abcfdb78a0c3fe326f06-11268872-images-thumbs&n=13" alt="Team workshop">
+      </figure>
+      <figure class="shot reveal">
+        <img src="https://avatars.mds.yandex.net/i?id=9c05ba206f06a2f17c0c3cb3a68afe81b5d64d2c-5287606-images-thumbs&n=13" alt="Urban strategy view">
+      </figure>
+      <figure class="shot reveal">
+        <img src="https://avatars.mds.yandex.net/i?id=01c37fc30db49739e42a074ac1e1da1a07688bca-16559529-images-thumbs&n=13" alt="Data & analytics">
+      </figure>
+      <figure class="shot reveal">
+        <img src="https://avatars.mds.yandex.net/i?id=7fa244a74423116b15d511bb2230f2e96610ba32-7551636-images-thumbs&n=13" alt="Project planning">
+      </figure>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="features">
+    <div class="container">
+      <h2 class="section-title reveal">How We Help</h2>
+      <p class="muted reveal">Five pillars that define our consulting approach.</p>
+      <div class="features-list">
+        <div class="feature reveal"><span class="dot" aria-hidden="true"></span> Strategy & operating models aligned to measurable business outcomes.</div>
+        <div class="feature reveal"><span class="dot" aria-hidden="true"></span> Process optimization and change management that stick.</div>
+        <div class="feature reveal"><span class="dot" aria-hidden="true"></span> Data & analytics for decisions: KPIs, dashboards, and experimentation.</div>
+        <div class="feature reveal"><span class="dot" aria-hidden="true"></span> Technology enablement—tools selection, integration, and rollout.</div>
+        <div class="feature reveal"><span class="dot" aria-hidden="true"></span> Governance, risk & compliance with clear documentation and training.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMING SOON -->
+  <section id="coming" class="coming">
+    <div class="container" style="text-align:center">
+      <span class="badge">🚀 Client Portal — Coming Soon</span>
+      <h3 class="reveal" style="margin:10px 0 6px">Project dashboards, document hub & online booking</h3>
+      <div class="marquee" aria-hidden="true">
+        <span>Roadmaps</span>
+        <span>Workshops</span>
+        <span>Health Checks</span>
+        <span>Operating KPIs</span>
+        <span>Playbooks</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="container">
+    <h2 class="section-title reveal">Contact</h2>
+    <div class="contact-grid" style="margin-top:12px">
+      <div class="card reveal">
+        <ul class="list">
+          <li><strong>Company:</strong> 2 SYN MANAGEMENT</li>
+          <li><strong>Email:</strong> <a href="mailto:admin@arwexy.shop">admin@arwexy.shop</a></li>
+          <li><strong>Phone:</strong> <a href="tel:+33758695550">+33 7 58 69 55 50</a></li>
+          <li><strong>Address:</strong> 11 RUE DES MISSONIERES, 30128 GARONS, Occitanie, France</li>
         </ul>
-    </nav>
-
-    <div class="hero" id="home">
-        <div class="hero-text">
-            <h1>PAT Cargo VAD LLC</h1>
-            <p>Your trusted partner in transportation and warehousing. We provide reliable cargo services and storage solutions to meet your business needs with efficiency and care.</p>
-        </div>
-        <div class="hero-img">
-            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=934&q=80" alt="Cargo Services">
-        </div>
+        <button class="btn-send" onclick="window.location.href='mailto:admin@arwexy.shop'">Send Email</button>
+      </div>
+      <div class="card reveal">
+        <form onsubmit="event.preventDefault(); window.location.href='mailto:admin@arwexy.shop?subject=Consulting%20Inquiry&body=' + encodeURIComponent(document.getElementById('msg').value);">
+          <input type="text" placeholder="Your Name" required />
+          <input type="email" placeholder="Your Email" required />
+          <textarea id="msg" placeholder="Briefly describe your project or challenge"></textarea>
+          <button type="submit" class="btn-send">Contact Us</button>
+        </form>
+      </div>
     </div>
-
-    <div class="section" id="about">
-        <h2>About Us</h2>
-        <p>PAT Cargo VAD LLC is a Domestic LLC based in Arizona, offering specialized services in transportation and warehousing. With a focus on reliability and customer satisfaction, we have been serving businesses since 2021.</p>
-        <p><strong>Registered Address:</strong><br>
-        2902 W Sweetwater Ave, Apt 2190, Phoenix, AZ 85029, United States</p>
+    <div class="container" style="padding-top:14px">
+      <iframe
+        src="https://www.google.com/maps?q=11+RUE+DES+MISSONIERES,+30128+GARONS,+France&output=embed"
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map to 2 SYN MANAGEMENT">
+      </iframe>
     </div>
+  </section>
 
-    <div class="section contact" id="contact">
-        <h2>Contact Us</h2>
-        <p><strong>Email:</strong> <a href="mailto:contact@patcargovadllc.click">contact@patcargovadllc.click</a></p>
-        <p><strong>Agent Address:</strong><br>
-        2902 W Sweetwater Ave, Apt 2190, Phoenix, AZ 85029, United States</p>
-    </div>
+  <footer>
+    <div class="container">© <span id="year"></span> 2 SYN MANAGEMENT — All rights reserved.</div>
+  </footer>
 
-    <footer>
-        &copy; 2025 PAT Cargo VAD LLC. All rights reserved.
-    </footer>
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    <script>
-        // Intersection Observer for fade-in effect
-        const sections = document.querySelectorAll('.section');
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-    </script>
-
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
+      });
+    }, {threshold:.15});
+    document.querySelectorAll('.reveal, .feature').forEach(el=>io.observe(el));
+  </script>
 </body>
 </html>
